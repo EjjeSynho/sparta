@@ -36,6 +36,7 @@ longitude = -70.4045*u.degree
 altitude = 2648.0*u.meter 
 location = coordinates.EarthLocation(lon=longitude,lat=latitude,height=altitude)
 
+from globals import SPHERE_DATA_FOLDER
 
 """
 This script creates a summary of the atmospheric conditions and AO performances 
@@ -925,7 +926,6 @@ def convert_keyword_coord(keyword_coord):
 
 if __name__ == "__main__":
 
-    
 
 #    date = sys.argv[1]
 #    path_raw = os.path.join('/data-ut3/raw',date)
@@ -949,7 +949,7 @@ if __name__ == "__main__":
     verbose=args.verbose
     analyse = args.analyse
     
-    local_path = Path('E:/ESO/Data/SPHERE/SPARTA_RAW/')        
+    local_path = Path(SPHERE_DATA_FOLDER+'SPARTA_RAW/')        
     
     if night is None: # if no night is specified, the user must have specified input files
         if files is None:

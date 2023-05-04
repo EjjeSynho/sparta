@@ -50,7 +50,7 @@ Modification:
     2021-10-18: using argparse 
 """
 
-def plot_sparta_data_2(path_output=Path('.'), files=[], plot=True, verbose=True):
+def plot_sparta_data_TipTop(path_output=Path('.'), files=[], plot=True, verbose=True):
     """
     Function that reads the Sparta files and extract atmospheric and AO data 
     Input:
@@ -1195,6 +1195,6 @@ def decompress_files(compressed_folder, decompressed_folder):
     # verbose=args.verbose
     # analyse = args.analyse
     
-    # local_path = Path('E:/ESO/Data/SPHERE/SPARTA_RAW_compressed/')
+    # local_path = Path(SPHERE_DATA_FOLDER+'SPARTA_RAW_compressed/')
     
     # username = 'akuznets'

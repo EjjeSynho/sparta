@@ -1,26 +1,30 @@
 #%%
 import os
 import re
+from pathlib import Path
+import requests
+
+from globals import SPHERE_DATA_FOLDER
 
 def list_files(path):
     """
     Print the names of all files in path and its subdirectories.
     """
     list_of_files = []
-    for root, _, files in os.walk(path):
+    for _, _, files in os.walk(path):
         for file in files:
             list_of_files.append(file)
     return list_of_files
 
-dir_left  = 'E:/ESO/Data/SPHERE/IRDIS_RAW/SPHERE_DC_DATA_LEFT/'
-dir_right = 'E:/ESO/Data/SPHERE/IRDIS_RAW/SPHERE_DC_DATA_RIGHT/'
+dir_left  = SPHERE_DATA_FOLDER+'IRDIS_RAW/SPHERE_DC_DATA_LEFT/'
+dir_right = SPHERE_DATA_FOLDER+'IRDIS_RAW/SPHERE_DC_DATA_RIGHT/'
 
 files_left  = list_files(dir_left)
 files_right = list_files(dir_right)
 
 #%%
-download_script_left  = 'E:/ESO/Data/SPHERE/IRDIS_RAW/sphere_dl_script_left.sh'
-download_script_right = 'E:/ESO/Data/SPHERE/IRDIS_RAW/sphere_dl_script_right.sh'
+download_script_left  = SPHERE_DATA_FOLDER+'IRDIS_RAW/sphere_dl_script_left.sh'
+download_script_right = SPHERE_DATA_FOLDER+'IRDIS_RAW/sphere_dl_script_right.sh'
 
 def files_to_download(download_script):
     with open(download_script, 'r') as f:
@@ -52,23 +56,9 @@ def extract_filename(entries):
 filenames_right, folders_right, links_right = extract_filename(files_to_download(download_script_right))
 filenames_left,  folders_left,  links_left  = extract_filename(files_to_download(download_script_left))
 
-# ids_download_r = []
-# for i,file in enumerate(filenames_right):
-#     if file not in files_right:
-#         ids_download_r.append(i)
-
-# ids_download_l = []
-# for i,file in enumerate(filenames_left):
-#     if file not in files_left:
-#         ids_download_l.append(i)
-
-
 # %%
-from pathlib import Path
-import requests
-
-root_r = Path('E:/ESO/Data/SPHERE/IRDIS_RAW/SPHERE_DC_DATA_RIGHT/')
-root_l = Path('E:/ESO/Data/SPHERE/IRDIS_RAW/SPHERE_DC_DATA_LEFT/')
+root_r = Path(SPHERE_DATA_FOLDER+'IRDIS_RAW/SPHERE_DC_DATA_RIGHT/')
+root_l = Path(SPHERE_DATA_FOLDER+'IRDIS_RAW/SPHERE_DC_DATA_LEFT/')
 
 def download_missing_files(root, filenames, folders, links):
     for id in range(len(filenames)):
